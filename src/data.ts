@@ -176,11 +176,34 @@ export const projects: Project[] = [
   },
   {
     rank: "A",
+    kicker: "// MCP · OPEN SOURCE",
+    title: "Resume MCP Server",
+    desc: "An MCP server that exposes my resume as a queryable API for AI assistants — add it to Claude or Cursor and ask about my background, answered from sourced data. Implements all three MCP primitives: tools, resources, and prompts.",
+    stack: ["TypeScript", "MCP", "@modelcontextprotocol/sdk", "Node.js"],
+    variant: "feature",
+    repo: "https://github.com/jason-bourne-gg/my-mcp-server",
+    metrics: [
+      { num: "11", label: "tools" },
+      { num: "3", label: "resources" },
+      { num: "2", label: "prompts" },
+    ],
+  },
+  {
+    rank: "B+",
+    kicker: "// BROWSER · AGENTS",
+    title: "Web Clipper Extension",
+    desc: "A Chrome extension that extracts any page's main content into clean, LLM-ready Markdown or JSON in one click — strips nav, ads, and boilerplate, handles tables and metadata. Built for feeding pages to agents (not PDFs).",
+    stack: ["Chrome MV3", "JavaScript", "DOM", "HTML→Markdown"],
+    variant: "default",
+    repo: "https://github.com/jason-bourne-gg/web-clipper-extension",
+  },
+  {
+    rank: "B+",
     kicker: "// DATA · STREAMING",
     title: "YouTube Streaming & Alert System",
     desc: "Pulls video stats from YouTube playlists, Avro-serializes them onto a Kafka topic, processes the stream, and dispatches alerts to a Telegram bot via Confluent HTTP connectors.",
     stack: ["Python", "Kafka", "Avro", "APIs"],
-    variant: "feature",
+    variant: "default",
   },
 ];
 
