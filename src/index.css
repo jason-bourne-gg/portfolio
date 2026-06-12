@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================================================
+   THEME SYSTEM
+   Every color is a CSS variable scoped to [data-theme]. Tailwind tokens
+   (bg, surface, accent, …) read these via tailwind.config.ts, so flipping
+   the data-theme attribute on <html> re-skins the whole site instantly.
+   Add a theme: copy a block, change values, then register it in
+   src/lib/themes.ts.
+   ===================================================================== */
+
+:root,
+[data-theme="cs2"] {
+  --bg: #0b0c0f;
+  --bg-2: #111319;
+  --surface: #15181f;
+  --surface-2: #1b1f28;
+  --border: #262b36;
+  --border-hi: #3a4151;
+  --text: #e8eaee;
+  --muted: #828b9c;
+  --accent: #de9b35; /* CS2 amber / contraband gold */
+  --accent-2: #5e98d9; /* CT blue */
+  --accent-ink: #0b0c0f;
+  --danger: #d94b3d;
+  --glow: rgba(222, 155, 53, 0.35);
+  --grid: rgba(255, 255, 255, 0.025);
+}
+
+[data-theme="ember"] {
+  --bg: #0c0808;
+  --bg-2: #150d0c;
+  --surface: #1a1010;
+  --surface-2: #221615;
+  --border: #341f1d;
+  --border-hi: #4d2c28;
+  --text: #f0e6e2;
+  --muted: #9c8580;
+  --accent: #e8533f; /* T-side molotov red-orange */
+  --accent-2: #e0a23a;
+  --accent-ink: #160a08;
+  --danger: #ffcf4d;
+  --glow: rgba(232, 83, 63, 0.4);
+  --grid: rgba(255, 255, 255, 0.025);
+}
+
+[data-theme="terminal"] {
+  --bg: #050806;
+  --bg-2: #08110b;
+  --surface: #0a160e;
+  --surface-2: #0e2014;
+  --border: #163a22;
+  --border-hi: #1f5230;
+  --text: #c7f5d4;
+  --muted: #5f9a72;
+  --accent: #36e07a; /* phosphor green */
+  --accent-2: #9bffb8;
+  --accent-ink: #03110a;
+  --danger: #ff5d5d;
+  --glow: rgba(54, 224, 122, 0.35);
+  --grid: rgba(54, 224, 122, 0.04);
+}
+
+[data-theme="arctic"] {
+  --bg: #e7e9ec;
+  --bg-2: #f2f3f5;
+  --surface: #ffffff;
+  --surface-2: #f5f6f8;
+  --border: #d3d7dd;
+  --border-hi: #b9c0c9;
+  --text: #1a1d24;
+  --muted: #5f6675;
+  --accent: #c4761a;
+  --accent-2: #2f6db0;
+  --accent-ink: #ffffff;
+  --danger: #c23a2c;
+  --glow: rgba(196, 118, 26, 0.25);
+  --grid: rgba(0, 0, 0, 0.035);
+}
+
+/* ---------------------------------------------------------------- base */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-text font-sans;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background 0.4s cubic-bezier(0.2, 0.7, 0.2, 1),
+      color 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  /* Fine-pointer devices get the custom crosshair; hide native cursor. */
+  @media (hover: hover) and (pointer: fine) {
+    body,
+    body a,
+    body button {
+      cursor: none;
+    }
+  }
+}
+
+/* ---------------------------------------------------------- utilities */
+@layer utilities {
+  /* Angular CS2 corner cut */
+  .clip-corner {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 14px),
+      calc(100% - 14px) 100%,
+      0 100%
+    );
+  }
+  .clip-corner-sm {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+  .clip-badge {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% 100%,
+      12px 100%,
+      0 calc(100% - 12px)
+    );
+  }
+  .clip-hex {
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  }
+
+  /* Outlined display text */
+  .text-stroke-accent {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent);
+  }
+
+  .grid-bg {
+    background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 46px 46px;
+    -webkit-mask-image: radial-gradient(
+      ellipse 80% 70% at 30% 40%,
+      #000 30%,
+      transparent 78%
+    );
+    mask-image: radial-gradient(
+      ellipse 80% 70% at 30% 40%,
+      #000 30%,
+      transparent 78%
+    );
+  }
+
+  .scanlines {
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent 0 2px,
+      rgba(0, 0, 0, 0.08) 2px 3px
+    );
+  }
+
+  .glow-shadow {
+    box-shadow: 0 8px 30px -8px var(--glow);
+  }
+}
+
+/* Rarity left-borders for skill tags */
+.rarity-industrial {
+  border-left-color: #5e98d9;
+}
+.rarity-milspec {
+  border-left-color: #4b69ff;
+}
+.rarity-restricted {
+  border-left-color: #8847ff;
+}
+.rarity-classified {
+  border-left-color: #d32ce6;
+}
+.rarity-covert {
+  border-left-color: #eb4b4b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  body,
+  body a,
+  body button {
+    cursor: auto !important;
+  }
+}
