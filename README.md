@@ -1,71 +1,90 @@
 # Aniket Charjan — Portfolio
 
-A CS2-themed personal portfolio. Zero build step — just `index.html`, `styles.css`,
-and `script.js`. Vanilla HTML/CSS/JS so it deploys anywhere (Firebase, Vercel,
-Netlify, GitHub Pages, Cloudflare Pages) by dropping the folder onto a static host.
+A CS2-themed personal portfolio, built as a single-page app with a fully
+swappable theme system.
 
-![CS2 theme](assets/road-clash.png)
+**Stack:** Vite · React 18 · TypeScript · Tailwind CSS · Framer Motion
 
-## Run locally
+## Develop
 
-No tooling required. Either open `index.html` directly, or serve it (recommended,
-so relative paths and fonts behave like production):
+Requires Node 20+.
 
 ```bash
-# Python
-python3 -m http.server 8754
-# → http://localhost:8754
-
-# or Node
-npx serve .
+npm install
+npm run dev        # dev server → http://localhost:5173
+npm run build      # type-check + production bundle → dist/
+npm run preview    # serve the production build
+npm run typecheck  # tsc, no emit
 ```
 
 ## Theming (the "swappable" part)
 
-Every color lives in CSS custom properties scoped to a `[data-theme]` block in
-`styles.css`. The theme is set by the `data-theme` attribute on `<html>` and
-persisted to `localStorage`. Four themes ship today:
+Every color is a CSS variable scoped to a `[data-theme]` block in
+`src/index.css`. Tailwind tokens (`bg`, `surface`, `accent`, …) read those
+variables (see `tailwind.config.ts`), so flipping the `data-theme` attribute on
+`<html>` re-skins every component instantly. The choice persists to
+`localStorage`. Four themes ship today:
 
-| Theme      | Vibe                          |
-| ---------- | ----------------------------- |
-| `cs2`      | Gunmetal + amber (default)    |
-| `ember`    | T-side molotov red            |
-| `terminal` | Phosphor-green hacker         |
-| `arctic`   | Clean light / daytime         |
+| Theme      | Vibe                       |
+| ---------- | -------------------------- |
+| `cs2`      | Gunmetal + amber (default) |
+| `ember`    | T-side molotov red         |
+| `terminal` | Phosphor-green hacker      |
+| `arctic`   | Clean light / daytime      |
 
 **Switch:** click the toggle in the top-right (cycles through all themes).
 
-**Add a new theme** in two steps:
+**Add a theme** in two steps:
 
-1. Copy a `[data-theme="..."]` block in `styles.css` and change the values.
-2. Add `{ id: "...", label: "..." }` to the `THEMES` array in `script.js`.
+1. Copy a `[data-theme="..."]` block in `src/index.css` and change the values.
+2. Append `{ id: "...", label: "..." }` to `THEMES` in `src/lib/themes.ts`.
 
-That's it — the switcher and persistence pick it up automatically.
+The switcher + persistence pick it up automatically.
 
 ## Editing content
 
-- **Text / projects / experience** — all in `index.html`, written as plain
-  semantic markup (no templating).
-- **Contact links** — edit the single `CONTACT` object at the top of `script.js`.
-  Changing a value there updates the displayed text *and* the `href` everywhere.
-- **Project images** — drop files in `assets/` and reference them from `index.html`.
+All copy lives in **`src/data.ts`** — profile, stats, skills (with rarity
+tiers), experience, projects, education, and the `contact` object. Components
+just render it, so you rarely touch JSX.
+
+- **Contact links** — edit the `contact` object in `src/data.ts`.
+- **Project images** — drop files in `public/` and reference them by `/name.png`.
+
+## Contact form
+
+The contact form in `src/components/Contact.tsx` works on any static host with
+zero setup: with no endpoint configured it opens the visitor's mail client
+pre-filled to your address (`mailto`). To collect submissions silently instead,
+set `FORM_ENDPOINT` at the top of that file to a free form endpoint
+([Formspree](https://formspree.io) or [Web3Forms](https://web3forms.com)) — the
+form will `POST` there automatically.
 
 ## Deploy
 
-The repo is a static site, so any of these work with no config:
+It's a static SPA — `npm run build` emits `dist/`. Any of these work:
 
-- **Firebase Hosting** — `firebase init hosting` (public dir = repo root), then `firebase deploy`.
-- **Vercel / Netlify** — import the repo; framework preset "Other", output = root.
-- **GitHub Pages** — Settings → Pages → deploy from branch (`/root`).
+- **Vercel / Netlify** — import the repo; framework preset auto-detects Vite
+  (build `npm run build`, output `dist`). Every push to `main` auto-deploys.
+- **Firebase Hosting** — `firebase init hosting` with public dir `dist`, then
+  `npm run build && firebase deploy`.
+- **GitHub Pages / Cloudflare Pages** — same build command + `dist` output.
 
 ## Structure
 
 ```
 .
-├── index.html      # all content + markup
-├── styles.css      # theme variables + all styling
-├── script.js       # theme switch, scroll reveal, count-up, crosshair
-└── assets/         # images
+├── index.html              # Vite entry (#root)
+├── src/
+│   ├── main.tsx            # React bootstrap
+│   ├── App.tsx             # composition
+│   ├── index.css           # Tailwind + theme variables + utilities
+│   ├── data.ts             # ALL content (edit here)
+│   ├── lib/themes.ts       # theme registry + useTheme hook
+│   └── components/         # Hud, Hero, About, Arsenal, Timeline,
+│                           # Operations, Training, Contact, Crosshair, …
+├── public/                 # static assets (images)
+├── tailwind.config.ts
+└── vite.config.ts
 ```
 
 ---

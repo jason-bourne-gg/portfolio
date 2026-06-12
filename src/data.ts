@@ -158,23 +158,14 @@ export interface Project {
   metrics?: Metric[];
 }
 
+/**
+ * SIDE PROJECTS ONLY. Full-time work lives in `experience` (the Deployment
+ * Log) — don't list employment here.
+ */
 export const projects: Project[] = [
   {
     rank: "A+",
-    kicker: "// FLAGSHIP",
-    title: "Autonomous AI Testing Agent",
-    desc: "An agent that authors and runs end-to-end browser tests for enterprise web apps. Planner-executor loop with Playwright tool-use over MCP, RAG over historical test artifacts, and a tiered LLM → SLM → SDK inference pipeline. Every step is traced and eval-gated in production.",
-    stack: ["LLMs/SLMs", "MCP", "Playwright", "RAG", "Node.js", "TypeScript"],
-    variant: "feature",
-    metrics: [
-      { num: "~90%", label: "faster" },
-      { num: "80%", label: "accuracy" },
-      { num: "~80%", label: "cheaper" },
-    ],
-  },
-  {
-    rank: "A+",
-    kicker: "// FLAGSHIP · GAME",
+    kicker: "// GAME · MULTIPLAYER",
     title: "Road Clash",
     desc: "A pseudo-3D, Road Rash–style combat racer that runs entirely in the browser — race AI rivals solo or spin up a room and brawl with friends over peer-to-peer WebRTC, no server, no accounts. Client-side prediction keeps controls local-feeling; remote riders are snapshot-interpolated to hide jitter, and a seeded RNG builds an identical track on every peer.",
     stack: ["TypeScript", "Canvas 2D", "WebRTC", "Trystero", "Vite", "Procedural Audio"],
@@ -185,27 +176,11 @@ export const projects: Project[] = [
   },
   {
     rank: "A",
-    kicker: "// ENTERPRISE",
-    title: "Global Budgeting & Audit Platform",
-    desc: "Budget-allocation engine for the world's largest soft-drink seller — ~70 ML-optimized tiers per brand, expense uploads from bottlers across 22 countries, and real-time KPI analytics for senior management.",
-    stack: ["Node.js", "MySQL", "Azure", "React", "K8s"],
-    variant: "default",
-  },
-  {
-    rank: "A",
-    kicker: "// GROWTH",
-    title: "Performance Marketing Engine",
-    desc: "Backend for a CPG giant's Amazon Ads tooling — drove a 370% revenue lift. ML core tracking 42 KPIs daily for ad-group recommendations, with audience targeting and RBAC.",
-    stack: ["Python", "FastAPI", "AWS", "ML"],
-    variant: "default",
-  },
-  {
-    rank: "B+",
-    kicker: "// SIDE OP",
+    kicker: "// DATA · STREAMING",
     title: "YouTube Streaming & Alert System",
     desc: "Pulls video stats from YouTube playlists, Avro-serializes them onto a Kafka topic, processes the stream, and dispatches alerts to a Telegram bot via Confluent HTTP connectors.",
     stack: ["Python", "Kafka", "Avro", "APIs"],
-    variant: "default",
+    variant: "feature",
   },
 ];
 
