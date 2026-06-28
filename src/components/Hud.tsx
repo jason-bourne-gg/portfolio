@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from "framer-motion";
-import { useEffect, useState } from "react";
+import { type MouseEvent, useEffect, useState } from "react";
 import { nav, profile } from "../data";
 import type { Theme } from "../lib/themes";
 
@@ -41,6 +41,25 @@ export function Hud({
     return () => io.disconnect();
   }, []);
 
+  // Navigate to a section. We can't rely on the browser's native anchor scroll
+  // here: closing the mobile menu in the same click re-renders this component,
+  // and that re-render cancels the in-flight (async, multi-frame) smooth scroll —
+  // so the URL updates but the page never moves. Instead we close the menu first,
+  // then scroll on the next paint, once the re-render has settled. behavior is
+  // left to the CSS `scroll-behavior` (smooth, or auto under prefers-reduced-motion).
+  const handleNavClick = (e: MouseEvent<HTMLAnchorElement>, href: string) => {
+    const target = document.getElementById(href.slice(1));
+    if (!target) return; // unknown anchor — let the browser handle it natively
+    e.preventDefault();
+    setMenuOpen(false);
+    // Update the address bar without triggering the browser's own (cancellable)
+    // scroll-to-fragment; we do the scrolling ourselves below.
+    history.pushState(null, "", href);
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => target.scrollIntoView())
+    );
+  };
+
   return (
     <motion.header
       initial={{ y: 0 }}
@@ -65,6 +84,7 @@ export function Hud({
               <a
                 key={n.href}
                 href={n.href}
+                onClick={(e) => handleNavClick(e, n.href)}
                 className={`group relative font-mono text-xs tracking-wider transition-colors ${
                   isActive ? "text-text" : "text-muted hover:text-text"
                 }`}
@@ -125,7 +145,7 @@ export function Hud({
                 <a
                   key={n.href}
                   href={n.href}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={(e) => handleNavClick(e, n.href)}
                   className="border-b border-border py-3.5 font-mono text-sm tracking-wider text-muted last:border-b-0 active:text-accent"
                 >
                   {n.label}
