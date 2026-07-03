@@ -155,6 +155,7 @@ export interface Project {
   media?: string;
   mediaTag?: string;
   repo?: string;
+  live?: string;
   metrics?: Metric[];
 }
 
@@ -173,6 +174,17 @@ export const projects: Project[] = [
     media: "/road-clash.png",
     mediaTag: "LIVE · BROWSER",
     repo: "https://github.com/jason-bourne-gg/road-clash",
+    live: "https://road-clash.vercel.app",
+  },
+  {
+    rank: "A",
+    kicker: "// WEBRTC · P2P",
+    title: "DirectDrop",
+    desc: "Send a file straight to another browser over WebRTC — pick a file, share a link, and it streams peer-to-peer with live progress. No upload, no server, no accounts; the bytes never touch a backend. Trystero handles signaling over public infrastructure, files are auto-chunked, and the receiver reassembles them in-memory.",
+    stack: ["TypeScript", "WebRTC", "Trystero", "Vite"],
+    variant: "feature",
+    live: "https://direct-drop-sigma.vercel.app",
+    repo: "https://github.com/jason-bourne-gg/DirectDrop",
   },
   {
     rank: "A",

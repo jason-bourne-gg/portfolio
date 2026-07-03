@@ -42,6 +42,19 @@ const RepoLink = ({ href, label }: { href: string; label: string }) => (
   </a>
 );
 
+const LiveLink = ({ href, label }: { href: string; label: string }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener"
+    aria-label={label}
+    title={label}
+    className="inline-flex items-center gap-1 border border-accent bg-bg-2 px-2 py-0.5 font-mono text-[0.62rem] font-bold tracking-widest text-accent transition-all duration-200 hover:-translate-y-0.5 hover:translate-x-0.5"
+  >
+    LIVE ↗
+  </a>
+);
+
 function FeatureCard({ p }: { p: Project }) {
   return (
     <article
@@ -54,6 +67,7 @@ function FeatureCard({ p }: { p: Project }) {
         <span className="mb-2 block font-mono text-[0.66rem] tracking-widest text-accent">{p.kicker}</span>
         <h3 className="mb-3 flex flex-wrap items-center gap-2 text-[clamp(1.2rem,2.4vw,1.6rem)]">
           {p.title}
+          {p.live && <LiveLink href={p.live} label={`Open ${p.title} live`} />}
           {p.repo && <RepoLink href={p.repo} label={`${p.title} repository`} />}
         </h3>
         <p className="mb-4 max-w-[64ch] text-[0.96rem] text-muted">{p.desc}</p>
@@ -98,6 +112,7 @@ function MediaCard({ p }: { p: Project }) {
         <span className="mb-2 block font-mono text-[0.66rem] tracking-widest text-accent">{p.kicker}</span>
         <h3 className="mb-3 flex flex-wrap items-center gap-2 text-[clamp(1.2rem,2.4vw,1.6rem)]">
           {p.title}
+          {p.live && <LiveLink href={p.live} label={`Open ${p.title} live`} />}
           {p.repo && <RepoLink href={p.repo} label={`${p.title} repository`} />}
         </h3>
         <p className="mb-4 max-w-[64ch] text-[0.96rem] text-muted">{p.desc}</p>
@@ -119,6 +134,7 @@ function DefaultCard({ p }: { p: Project }) {
         <span className="mb-2 block font-mono text-[0.66rem] tracking-widest text-accent">{p.kicker}</span>
         <h3 className="mb-3 flex flex-wrap items-center gap-2 text-[clamp(1.2rem,2.4vw,1.6rem)]">
           {p.title}
+          {p.live && <LiveLink href={p.live} label={`Open ${p.title} live`} />}
           {p.repo && <RepoLink href={p.repo} label={`${p.title} repository`} />}
         </h3>
         <p className="mb-4 max-w-[64ch] text-[0.96rem] text-muted">{p.desc}</p>
