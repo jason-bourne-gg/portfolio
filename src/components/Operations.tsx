@@ -96,7 +96,7 @@ function MediaCard({ p }: { p: Project }) {
       <div className="relative overflow-hidden border-b border-border md:w-[46%] md:border-b-0 md:border-r">
         <img
           src={p.media}
-          alt={`${p.title} — gameplay`}
+          alt={`${p.title} — preview`}
           loading="lazy"
           width={1200}
           height={703}
