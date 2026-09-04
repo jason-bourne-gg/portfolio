@@ -3,6 +3,8 @@
 A CS2-themed personal portfolio, built as a single-page app with a fully
 swappable theme system.
 
+**Live:** https://aniket-charjan.vercel.app
+
 **Stack:** Vite · React 18 · TypeScript · Tailwind CSS · Framer Motion
 
 ## Develop
