@@ -96,27 +96,45 @@ function FeatureCard({ p }: { p: Project }) {
 }
 
 function MediaCard({ p }: { p: Project }) {
+  // "contain" screenshots must not be cropped, so they get the full card width
+  // stacked above the copy rather than a narrow side column that letterboxes them.
+  const stacked = p.mediaFit === "contain";
+
   return (
     <article
       onMouseMove={trackGlow}
-      className="clip-corner group relative col-span-full flex flex-col overflow-hidden border border-border bg-surface transition-all duration-300 ease-tactical hover:-translate-y-1 hover:border-border-hi md:flex-row"
+      className={`clip-corner group relative col-span-full flex flex-col overflow-hidden border border-border bg-surface transition-all duration-300 ease-tactical hover:-translate-y-1 hover:border-border-hi ${
+        stacked ? "" : "md:flex-row"
+      }`}
     >
-      <div className="relative overflow-hidden border-b border-border md:w-[46%] md:border-b-0 md:border-r">
+      <div
+        className={`relative overflow-hidden border-b border-border ${
+          stacked ? "bg-bg-2" : "md:w-[46%] md:border-b-0 md:border-r"
+        }`}
+      >
         <img
           src={p.media}
           alt={`${p.title} — preview`}
           loading="lazy"
           width={1200}
           height={703}
-          className="h-full max-h-[260px] w-full object-cover transition-transform duration-500 ease-tactical group-hover:scale-105 md:max-h-none"
+          className={
+            stacked
+              ? "block w-full object-contain"
+              : "h-full max-h-[260px] w-full object-cover transition-transform duration-500 ease-tactical group-hover:scale-105 md:max-h-none"
+          }
         />
         {p.mediaTag && (
-          <span className="absolute left-3 top-3 border border-accent bg-bg/70 px-2 py-1 font-mono text-[0.6rem] tracking-widest text-accent backdrop-blur-sm">
+          <span
+            className={`absolute left-3 border border-accent bg-bg/70 px-2 py-1 font-mono text-[0.6rem] tracking-widest text-accent backdrop-blur-sm ${
+              stacked ? "bottom-3" : "top-3"
+            }`}
+          >
             {p.mediaTag}
           </span>
         )}
       </div>
-      <div className="relative z-10 self-center p-6">
+      <div className={`relative z-10 p-6 ${stacked ? "w-full" : "self-center"}`}>
         <span className="mb-2 block font-mono text-[0.66rem] tracking-widest text-accent">{p.kicker}</span>
         <h3 className="mb-3 flex flex-wrap items-center gap-2 text-[clamp(1.2rem,2.4vw,1.6rem)]">
           {p.title}

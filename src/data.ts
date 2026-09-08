@@ -159,6 +159,8 @@ export interface Project {
   metrics?: Metric[];
   /** Short status caveat shown under the description (e.g. a demo that is partly offline). */
   note?: string;
+  /** How `media` fills its column. "contain" shows the whole frame uncropped; defaults to "cover". */
+  mediaFit?: "cover" | "contain";
 }
 
 /**
@@ -174,6 +176,7 @@ export const projects: Project[] = [
     stack: ["TypeScript", "Vue 3", "Claude API", "SSE", "Cloud Functions", "Firestore", "Monaco", "OAuth 2.0"],
     variant: "media",
     media: "/genesis.png",
+    mediaFit: "contain",
     mediaTag: "LIVE · AI",
     repo: "https://github.com/jason-bourne-gg/genesis-highlevel-app-builder",
     live: "https://genesysbe-cbd7e.web.app",
