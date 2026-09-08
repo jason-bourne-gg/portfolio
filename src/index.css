@@ -223,3 +223,15 @@
     cursor: auto !important;
   }
 }
+
+/* v2 trace explorer — the waterfall's fixed name column. Narrow on phones so
+   the time axis keeps enough room to stay readable. */
+:root {
+  --name-col: 200px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --name-col: 320px;
+  }
+}

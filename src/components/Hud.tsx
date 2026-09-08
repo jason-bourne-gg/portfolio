@@ -101,6 +101,15 @@ export function Hud({
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* v1 lives at /classic; this is the way back to the trace explorer. */}
+          <a
+            href="/"
+            title="Trace explorer (v2)"
+            className="clip-corner-sm hidden items-center gap-2 border border-border-hi bg-surface px-3 py-2 font-mono text-[0.72rem] tracking-widest text-muted transition-colors hover:border-accent hover:text-accent sm:inline-flex"
+          >
+            V2 ↗
+          </a>
+
           <button
             onClick={onCycleTheme}
             aria-label={`Switch theme (current: ${current.label})`}
