@@ -52,7 +52,7 @@ export default function TraceApp() {
   const span = SPAN_BY_ID[selected] ?? ROOT;
 
   const select = useCallback(
-    (id: string) => navigate(id === ROOT.id ? "/" : `${SPAN_ROUTE}${encodeURIComponent(id)}`),
+    (id: string) => navigate(id === ROOT.id ? "/trace" : `${SPAN_ROUTE}${encodeURIComponent(id)}`),
     [navigate]
   );
 
@@ -175,10 +175,10 @@ export default function TraceApp() {
           </button>
 
           <a
-            href="/classic"
+            href="/"
             className="border border-border px-2 py-1 text-[0.6rem] uppercase tracking-widest text-muted transition-colors hover:border-accent hover:text-accent"
           >
-            v1 ↗
+            main ↗
           </a>
         </div>
       </header>
