@@ -157,6 +157,8 @@ export interface Project {
   repo?: string;
   live?: string;
   metrics?: Metric[];
+  /** Short status caveat shown under the description (e.g. a demo that is partly offline). */
+  note?: string;
 }
 
 /**
@@ -164,6 +166,19 @@ export interface Project {
  * Log) — don't list employment here.
  */
 export const projects: Project[] = [
+  {
+    rank: "A+",
+    kicker: "// AI · APP BUILDER",
+    title: "Genesis",
+    desc: "An AI app builder for HighLevel: sign in, connect your account, describe an internal tool in a chat box, and Claude writes it — streaming into a Monaco editor while a sandboxed preview runs the result against your own contacts, conversations and calendars. Generated code is treated as untrusted end to end: it renders on an opaque origin, never sees a token, and every HighLevel call is re-checked by a server-side proxy. Writes, extended reads and Google sign-in ship dark behind per-account feature flags, so turning one on is a flip rather than a deploy. 539 tests, 91% coverage.",
+    stack: ["TypeScript", "Vue 3", "Claude API", "SSE", "Cloud Functions", "Firestore", "Monaco", "OAuth 2.0"],
+    variant: "media",
+    media: "/genesis.png",
+    mediaTag: "LIVE · AI",
+    repo: "https://github.com/jason-bourne-gg/genesis-highlevel-app-builder",
+    live: "https://genesysbe-cbd7e.web.app",
+    note: "Code generation is switched off on the live demo — the model API key has been removed, so prompts will not run. Sign-in, HighLevel OAuth and the preview panel all still work; the generator itself is in the repo.",
+  },
   {
     rank: "A+",
     kicker: "// GAME · MULTIPLAYER",

@@ -19,6 +19,13 @@ const Rank = ({ rank }: { rank: string }) => (
   </div>
 );
 
+const Note = ({ text }: { text: string }) => (
+  <p className="mb-4 max-w-[64ch] border-l-2 border-accent/60 bg-bg-2/60 py-1.5 pl-3 font-mono text-[0.72rem] leading-relaxed text-muted">
+    <span className="mr-1.5 font-bold tracking-widest text-accent">NOTE</span>
+    {text}
+  </p>
+);
+
 const Stack = ({ items }: { items: string[] }) => (
   <div className="flex flex-wrap gap-1.5">
     {items.map((t) => (
@@ -71,6 +78,7 @@ function FeatureCard({ p }: { p: Project }) {
           {p.repo && <RepoLink href={p.repo} label={`${p.title} repository`} />}
         </h3>
         <p className="mb-4 max-w-[64ch] text-[0.96rem] text-muted">{p.desc}</p>
+        {p.note && <Note text={p.note} />}
         {p.metrics && (
           <div className="mb-5 flex gap-7">
             {p.metrics.map((m) => (
@@ -116,6 +124,7 @@ function MediaCard({ p }: { p: Project }) {
           {p.repo && <RepoLink href={p.repo} label={`${p.title} repository`} />}
         </h3>
         <p className="mb-4 max-w-[64ch] text-[0.96rem] text-muted">{p.desc}</p>
+        {p.note && <Note text={p.note} />}
         <Stack items={p.stack} />
       </div>
     </article>
@@ -138,6 +147,7 @@ function DefaultCard({ p }: { p: Project }) {
           {p.repo && <RepoLink href={p.repo} label={`${p.title} repository`} />}
         </h3>
         <p className="mb-4 max-w-[64ch] text-[0.96rem] text-muted">{p.desc}</p>
+        {p.note && <Note text={p.note} />}
         <Stack items={p.stack} />
       </div>
     </article>
