@@ -22,6 +22,7 @@ import {
 } from "./trace";
 import { Axis, Waterfall } from "./components/Waterfall";
 import { DetailPane } from "./components/DetailPane";
+import "../index.css";
 
 const SPAN_ROUTE = "/span/";
 
@@ -175,7 +176,7 @@ export default function TraceApp() {
           </button>
 
           <a
-            href="/"
+            href="/beta/v2"
             className="border border-border px-2 py-1 text-[0.6rem] uppercase tracking-widest text-muted transition-colors hover:border-accent hover:text-accent"
           >
             main ↗

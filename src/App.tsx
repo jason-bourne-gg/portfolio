@@ -1,3 +1,4 @@
+import "./index.css";
 import { MotionConfig } from "framer-motion";
 import { useTheme } from "./lib/themes";
 import { Crosshair } from "./components/Crosshair";

@@ -7,6 +7,24 @@ swappable theme system.
 
 **Stack:** Vite · React 18 · TypeScript · Tailwind CSS · Framer Motion
 
+## Versions
+
+The CS2 site is the site — it owns `/`. Two later experiments live on behind
+`/beta` and are not linked from anywhere except the `BETA ↗` button in the
+header. Each version is code-split, so visiting `/` never downloads the others.
+
+| Route | What it is |
+| ----- | ---------- |
+| `/` | **v1**, the CS2-themed site described below. This is production. |
+| `/beta` | **v3**, a portfolio you ride through: an isometric 3D road at dusk with a stop for every place I've been. Falls back to a plain page for reduced motion. |
+| `/beta/v2` | **v2**, the page that assembles itself as an agent run, every section citing the call that built it. |
+| `/trace` | v2's trace explorer, with deep links at `/span/:id`. |
+
+Each version keeps its own stylesheet and loads it only on its own route —
+v1's CSS hides the native cursor for the crosshair, which would break the
+others. v3's content lives in `src/site/content.ts`, separate from v1's
+`src/data.ts`.
+
 ## Develop
 
 Requires Node 20+.
@@ -77,13 +95,16 @@ It's a static SPA — `npm run build` emits `dist/`. Any of these work:
 .
 ├── index.html              # Vite entry (#root)
 ├── src/
-│   ├── main.tsx            # React bootstrap
-│   ├── App.tsx             # composition
+│   ├── main.tsx            # routes between the versions, all lazy-loaded
+│   ├── App.tsx             # v1 composition
 │   ├── index.css           # Tailwind + theme variables + utilities
 │   ├── data.ts             # ALL content (edit here)
 │   ├── lib/themes.ts       # theme registry + useTheme hook
-│   └── components/         # Hud, Hero, About, Arsenal, Timeline,
-│                           # Operations, Training, Contact, Crosshair, …
+│   ├── components/         # v1: Hud, Hero, About, Arsenal, Timeline,
+│   │                       # Operations, Training, Contact, Crosshair, …
+│   ├── v2/                 # the self-assembling page + trace explorer
+│   └── site/               # v3: content.ts, the plain page, and world/
+│                           # (three.js scene, stations, meshes)
 ├── public/                 # static assets (images)
 ├── tailwind.config.ts
 └── vite.config.ts

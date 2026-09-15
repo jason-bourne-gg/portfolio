@@ -6,6 +6,7 @@
    that opens the exact call and payload it was built from.
    ===================================================================== */
 
+import "../index.css";
 import { MotionConfig } from "framer-motion";
 import { useTheme } from "../lib/themes";
 import { profile } from "../data";
@@ -36,7 +37,7 @@ export default function V2App() {
         <div className="min-h-dvh bg-bg text-text">
           <header className="sticky top-0 z-30 border-b border-border bg-bg/90 backdrop-blur-sm">
             <div className="mx-auto flex max-w-page flex-wrap items-center gap-x-5 gap-y-2 px-5 py-2.5 sm:px-8">
-              <a href="/" className="font-display text-[0.92rem] font-extrabold tracking-wide">
+              <a href="/beta/v2" className="font-display text-[0.92rem] font-extrabold tracking-wide">
                 {profile.first}
                 <span className="text-accent">.{profile.last}</span>
               </a>
@@ -61,7 +62,7 @@ export default function V2App() {
                   trace ↗
                 </a>
                 <a
-                  href="/classic"
+                  href="/"
                   className="border border-border px-2 py-1 uppercase tracking-widest text-muted transition-colors hover:border-accent hover:text-accent"
                 >
                   v1 ↗
