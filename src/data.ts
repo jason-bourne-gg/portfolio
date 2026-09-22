@@ -170,6 +170,25 @@ export interface Project {
 export const projects: Project[] = [
   {
     rank: "A+",
+    kicker: "// FULL-STACK · REAL CUSTOMER",
+    title: "Plotting Society",
+    desc: "Most people who buy a plot never live near it, so every question — is my plot still clear, where did the maintenance money go, when does the road get tarred — becomes a phone call to the builder's sales desk. This replaces that desk. Built against a real 823-plot, 58-acre NMRDA-sanctioned project in Nagpur: a live layout map, a dated photo feed from site, an append-only society ledger, and owner queries on a visible SLA clock. Three tiers — guests browse and enquire with no account, owners see their plot and dues, builders get an admin portal. Go on the standard library router with four dependencies; S3 request signing written against the stdlib rather than the AWS SDK.",
+    stack: ["Go", "Postgres", "React", "TypeScript", "Tailwind", "Docker", "Cloudflare Workers", "Render"],
+    variant: "media",
+    media: "/plotting-society.png",
+    mediaFit: "contain",
+    mediaTag: "LIVE · FULL-STACK",
+    repo: "https://github.com/jason-bourne-gg/plotting-society",
+    live: "https://plotting-society.aniketcharjan3.workers.dev",
+    metrics: [
+      { num: "823", label: "Plots" },
+      { num: "93.8%", label: "Coverage" },
+      { num: "\u20b90", label: "Cost / month" },
+    ],
+    note: "Demo data. Plot numbers, sector ranges, areas and the RERA number follow the sanctioned layout; ownership, dues and queries are invented.",
+  },
+  {
+    rank: "A+",
     kicker: "// AI · APP BUILDER",
     title: "Genesis",
     desc: "An AI app builder for HighLevel: describe an internal tool in a chat box and Claude writes it, streaming into a Monaco editor while a sandboxed preview runs the result against your own contacts and calendars. Generated code is untrusted throughout — opaque origin, no tokens in the browser, every HighLevel call re-checked server-side. Writes and extended reads ship dark behind per-account feature flags. 539 tests, 91% coverage.",
