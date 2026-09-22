@@ -172,7 +172,7 @@ export const projects: Project[] = [
     rank: "A+",
     kicker: "// FULL-STACK · REAL CUSTOMER",
     title: "Plotting Society",
-    desc: "Most people who buy a plot never live near it, so every question — is my plot still clear, where did the maintenance money go, when does the road get tarred — becomes a phone call to the builder's sales desk. This replaces that desk. Built against a real 823-plot, 58-acre NMRDA-sanctioned project in Nagpur: a live layout map, a dated photo feed from site, an append-only society ledger, and owner queries on a visible SLA clock. Three tiers — guests browse and enquire with no account, owners see their plot and dues, builders get an admin portal. Go on the standard library router with four dependencies; S3 request signing written against the stdlib rather than the AWS SDK.",
+    desc: "Plot owners rarely live near the land they bought, so every question — is my plot still clear, where did the maintenance money go — becomes a phone call to the builder's sales desk. This replaces it. Built against a real 823-plot, 58-acre project in Nagpur: a live layout map, an append-only society ledger, and owner queries on a visible SLA clock. Guests browse and enquire with no account; every enquiry lands in the builder's leads board.",
     stack: ["Go", "Postgres", "React", "TypeScript", "Tailwind", "Docker", "Cloudflare Workers", "Render"],
     variant: "media",
     media: "/plotting-society.png",
