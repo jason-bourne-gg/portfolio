@@ -155,28 +155,28 @@ function MediaCard({ p }: { p: Project }) {
   );
 }
 
-function DefaultCard({ p }: { p: Project }) {
+function CompactCard({ p }: { p: Project }) {
   return (
     <article
       onMouseMove={trackGlow}
-      className="clip-corner group relative flex gap-5 overflow-hidden border border-border bg-surface p-6 transition-all duration-300 ease-tactical hover:-translate-y-1 hover:border-border-hi"
+      className="clip-corner group relative h-full overflow-hidden border border-border bg-surface p-5 transition-all duration-300 ease-tactical hover:-translate-y-1 hover:border-border-hi"
     >
       <Glow />
-      <Rank rank={p.rank} />
       <div className="relative z-10">
-        <span className="mb-2 block font-mono text-[0.66rem] tracking-widest text-accent">{p.kicker}</span>
-        <h3 className="mb-3 flex flex-wrap items-center gap-2 text-[clamp(1.2rem,2.4vw,1.6rem)]">
+        <span className="mb-2 block font-mono text-[0.62rem] tracking-widest text-accent">{p.kicker}</span>
+        <h3 className="mb-2 flex flex-wrap items-center gap-2 text-[1.05rem]">
           {p.title}
           {p.live && <LiveLink href={p.live} label={`Open ${p.title} live`} />}
           {p.repo && <RepoLink href={p.repo} label={`${p.title} repository`} />}
         </h3>
-        <p className="mb-4 max-w-[64ch] text-[0.96rem] text-muted">{p.desc}</p>
-        {p.note && <Note text={p.note} />}
-        <Stack items={p.stack} />
+        <p className="text-[0.88rem] text-muted">{p.blurb ?? p.desc}</p>
       </div>
     </article>
   );
 }
+
+const flagships = projects.filter((p) => p.variant !== "compact");
+const moreBuilds = projects.filter((p) => p.variant === "compact");
 
 export function Operations() {
   return (
@@ -190,15 +190,26 @@ export function Operations() {
         </p>
       </Reveal>
 
-      <div className="grid gap-5 md:grid-cols-2">
-        {projects.map((p, i) => (
-          <Reveal key={p.title} delay={(i % 2) * 0.08} className={p.variant === "default" ? "" : "col-span-full"}>
-            {p.variant === "feature" && <FeatureCard p={p} />}
-            {p.variant === "media" && <MediaCard p={p} />}
-            {p.variant === "default" && <DefaultCard p={p} />}
+      <div className="grid gap-5">
+        {flagships.map((p) => (
+          <Reveal key={p.title}>
+            {p.variant === "feature" ? <FeatureCard p={p} /> : <MediaCard p={p} />}
           </Reveal>
         ))}
       </div>
+
+      {moreBuilds.length > 0 && (
+        <>
+          <h3 className="mb-5 mt-14 font-mono text-[0.72rem] tracking-widest text-muted">// MORE BUILDS</h3>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {moreBuilds.map((p, i) => (
+              <Reveal key={p.title} delay={(i % 2) * 0.08} className="h-full">
+                <CompactCard p={p} />
+              </Reveal>
+            ))}
+          </div>
+        </>
+      )}
     </section>
   );
 }

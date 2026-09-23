@@ -151,7 +151,10 @@ export interface Project {
   title: string;
   desc: string;
   stack: string[];
-  variant: "feature" | "media" | "default";
+  /** "compact" renders in the short "More builds" grid below the flagships. */
+  variant: "feature" | "media" | "compact";
+  /** One-line summary for compact cards; `desc` stays the long form other versions use. */
+  blurb?: string;
   media?: string;
   mediaTag?: string;
   repo?: string;
@@ -214,7 +217,7 @@ export const projects: Project[] = [
     mediaTag: "LIVE · AI",
     repo: "https://github.com/jason-bourne-gg/genesis-highlevel-app-builder",
     live: "https://genesysbe-cbd7e.web.app",
-    note: "Generation is off on the live demo — the model API key has been removed, so prompts will not run. Sign-in, OAuth and the preview still work.",
+    note: "Generation is off on the live demo (API key removed); sign-in, OAuth and preview still work.",
   },
   {
     rank: "A+",
@@ -222,7 +225,8 @@ export const projects: Project[] = [
     title: "Road Clash",
     desc: "A pseudo-3D, Road Rash–style combat racer that runs entirely in the browser — race AI rivals solo or spin up a room and brawl with friends over peer-to-peer WebRTC, no server, no accounts. Client-side prediction keeps controls local-feeling; remote riders are snapshot-interpolated to hide jitter, and a seeded RNG builds an identical track on every peer.",
     stack: ["TypeScript", "Canvas 2D", "WebRTC", "Trystero", "Vite", "Procedural Audio"],
-    variant: "media",
+    variant: "compact",
+    blurb: "Road Rash–style combat racer in the browser, multiplayer over peer-to-peer WebRTC with no server.",
     media: "/road-clash.png",
     mediaTag: "LIVE · BROWSER",
     repo: "https://github.com/jason-bourne-gg/road-clash",
@@ -234,7 +238,8 @@ export const projects: Project[] = [
     title: "DirectDrop",
     desc: "Send a file straight to another browser over WebRTC — pick a file, share a link, and it streams peer-to-peer with live progress. No upload, no server, no accounts; the bytes never touch a backend. Trystero handles signaling over public infrastructure, files are auto-chunked, and the receiver reassembles them in-memory.",
     stack: ["TypeScript", "WebRTC", "Trystero", "Vite"],
-    variant: "media",
+    variant: "compact",
+    blurb: "Browser-to-browser file transfer over WebRTC. No upload, no server, no accounts.",
     media: "/direct-drop.png",
     mediaTag: "LIVE · P2P",
     live: "https://direct-drop-sigma.vercel.app",
@@ -246,7 +251,8 @@ export const projects: Project[] = [
     title: "Resume MCP Server",
     desc: "An MCP server that exposes my resume as a queryable API for AI assistants — add it to Claude or Cursor and ask about my background, answered from sourced data. Implements all three MCP primitives: tools, resources, and prompts.",
     stack: ["TypeScript", "MCP", "@modelcontextprotocol/sdk", "Node.js"],
-    variant: "feature",
+    variant: "compact",
+    blurb: "My resume as an MCP server for Claude or Cursor, using tools, resources and prompts.",
     repo: "https://github.com/jason-bourne-gg/my-mcp-server",
     metrics: [
       { num: "11", label: "tools" },
@@ -260,16 +266,9 @@ export const projects: Project[] = [
     title: "Web Clipper Extension",
     desc: "A Chrome extension that extracts any page's main content into clean, LLM-ready Markdown or JSON in one click — strips nav, ads, and boilerplate, handles tables and metadata. Built for feeding pages to agents (not PDFs).",
     stack: ["Chrome MV3", "JavaScript", "DOM", "HTML→Markdown"],
-    variant: "default",
+    variant: "compact",
+    blurb: "Chrome extension that turns any page into clean, LLM-ready Markdown or JSON in one click.",
     repo: "https://github.com/jason-bourne-gg/web-clipper-extension",
-  },
-  {
-    rank: "B+",
-    kicker: "// DATA · STREAMING",
-    title: "YouTube Streaming & Alert System",
-    desc: "Pulls video stats from YouTube playlists, Avro-serializes them onto a Kafka topic, processes the stream, and dispatches alerts to a Telegram bot via Confluent HTTP connectors.",
-    stack: ["Python", "Kafka", "Avro", "APIs"],
-    variant: "default",
   },
 ];
 
