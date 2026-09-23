@@ -98,6 +98,12 @@ function FeatureCard({ p }: { p: Project }) {
 function MediaCard({ p }: { p: Project }) {
   // "contain" screenshots must not be cropped, so they get the full card width
   // stacked above the copy rather than a narrow side column that letterboxes them.
+  //
+  // Capped, though. Full width with no height limit meant a 1200x703 screenshot
+  // rendered around 880px tall on a desktop viewport: one project filled the
+  // screen and the list stopped reading as a list. Centring it under a max
+  // width keeps it uncropped and still the widest thing on the card, without
+  // pushing the next project a whole screen down.
   const stacked = p.mediaFit === "contain";
 
   return (
@@ -120,7 +126,7 @@ function MediaCard({ p }: { p: Project }) {
           height={703}
           className={
             stacked
-              ? "block w-full object-contain"
+              ? "mx-auto block w-full max-w-[720px] object-contain"
               : "h-full max-h-[260px] w-full object-cover transition-transform duration-500 ease-tactical group-hover:scale-105 md:max-h-none"
           }
         />
