@@ -170,6 +170,21 @@ export interface Project {
 export const projects: Project[] = [
   {
     rank: "A+",
+    kicker: "// AI · EVALS & OBSERVABILITY",
+    title: "agent-evals",
+    desc: "An eval and observability harness for LLM agents. Most eval repos need an API key, so nobody runs them and the numbers in the README cannot be checked \u2014 this one records model calls once and replays them, so the suite runs from fixtures with no key and its own CI runs it on every push. Traces every step, judges pairwise in both presentation orders and reports the flip rate as the judge's error bar, calibrates against human labels with Cohen's kappa, and scores the trajectory rather than only the final answer. Zero runtime dependencies.",
+    stack: ["TypeScript", "Node 20", "LLM evals", "Tracing", "Record/Replay", "CI gates"],
+    variant: "feature",
+    repo: "https://github.com/jason-bourne-gg/agent-evals",
+    metrics: [
+      { num: "92% \u2192 28%", label: "Replay vs live" },
+      { num: "0.62", label: "Judge kappa" },
+      { num: "100", label: "Tests" },
+    ],
+    note: "Run the same suite live and it drops from 92% to 28%, with the larger model scoring worse than the smaller one \u2014 almost every extra failure is a brittle string assertion, not a misbehaving agent. The assertions are left as they are and the result is documented, because tuning them until live passes would hide it.",
+  },
+  {
+    rank: "A+",
     kicker: "// FULL-STACK · REAL CUSTOMER",
     title: "Plotting Society",
     desc: "Plot owners rarely live near the land they bought, so every question — is my plot still clear, where did the maintenance money go — becomes a phone call to the builder's sales desk. This replaces it. Built against a real 823-plot, 58-acre project in Nagpur: a live layout map, an append-only society ledger, and owner queries on a visible SLA clock. Guests browse and enquire with no account; every enquiry lands in the builder's leads board.",
